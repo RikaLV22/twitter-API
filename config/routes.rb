@@ -8,6 +8,12 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   # root "posts#index"
   resources :users, only: [:index,:show,:create,:update,:destroy]
+  resources :tweets, only: [:index, :show, :create, :destroy]
+  resoucres :like, only: [:create, :destroy]
+  resources :users do
+    post "follow", to: "follows#create"
+    delete "unfollow/:id", to: "follows#destroy"
+  end
 
   get "/confirm", to: "users#confirm"
   post "/login", to: "auth#login"

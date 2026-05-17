@@ -15,7 +15,8 @@ default: &default
   max_connections: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
   username: develop-user3
   password: password3
-  socket: /var/run/mysqld/mysqld.sock
+  host: 127.0.0.1
+  port: 3306
 
 development:
   <<: *default
