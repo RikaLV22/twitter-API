@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # README
 
 This README would normally document whatever steps are necessary to get the
@@ -22,3 +23,7 @@ Things you may want to cover:
 * Deployment instructions
 
 * ...
+=======
+# twitter-API
+共同開発
+>>>>>>> 1284edb363e0f0e6bec36410858ecd2b43e91113
