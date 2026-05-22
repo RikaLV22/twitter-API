@@ -20,7 +20,7 @@ class TweetsController < ApplicationController
   end
 
   def show
-    tweet = Tweet.find(paranms[:id])
+    tweet = Tweet.find(params[:id])
     render json: tweet, include: :user
   end
 
