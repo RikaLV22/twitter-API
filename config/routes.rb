@@ -9,7 +9,7 @@ Rails.application.routes.draw do
   # root "posts#index"
   resources :users, only: [:index,:show,:create,:update,:destroy]
   resources :tweets, only: [:index, :show, :create, :destroy]
-  resoucres :like, only: [:create, :destroy]
+  resources :like, only: [:create, :destroy]
   resources :users do
     post "follow", to: "follows#create"
     delete "unfollow/:id", to: "follows#destroy"

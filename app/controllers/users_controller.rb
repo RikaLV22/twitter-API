@@ -37,7 +37,7 @@ class UsersController < ApplicationController
         if user.present? && !user.confirmed
             user.update(
                 confirmed: true,
-                confirmed_at: Time.current
+                confirmed_at: Time.current,
                 confirmation_token: nil
             )
 
@@ -98,3 +98,4 @@ class UsersController < ApplicationController
             :username
         )
     end
+end
