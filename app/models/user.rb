@@ -26,10 +26,10 @@ class User < ApplicationRecord
         self.confirmation_token = SecureRandom.urlsafe_base64
     end
 
-    default_scope { where(deleted_at: nil) }
+    scope :active_users, -> { where(deleted_at: nil) }
 
     has_many :tweets
-    has_many :Likes, dependent: :destroy
+    has_many :likes, dependent: :destroy
 
     has_many :active_follows,
             class_name: "Follow",

@@ -10,6 +10,9 @@ Rails.application.routes.draw do
   resources :users, only: [:index,:show,:create,:update,:destroy]
   resources :tweets, only: [:index, :show, :create, :destroy]
   resources :like, only: [:create, :destroy]
+  resources :tweets do
+    post :reply, on: :member
+  end
   resources :users do
     post "follow", to: "follows#create"
     delete "unfollow/:id", to: "follows#destroy"

@@ -39,6 +39,22 @@ class TweetsController < ApplicationController
     end
   end
 
+  def reply
+    parent = Tweet.find(params[:id])
+
+    tweet = current_user.tweets.build(
+      body: params[:body],
+      parent_tweet_id: parent.id
+    )
+
+    if tweet.save
+      render json: tweet, include: :user
+    else
+      render json: { errors: tweet.errors.full_messages }, status: :unprocessable_entity
+    end
+
+  end
+
   def destroy
     tweet = current_user.tweets.find(params[:id])
     tweet.destroy
