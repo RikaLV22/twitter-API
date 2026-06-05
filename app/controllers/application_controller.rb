@@ -1,13 +1,18 @@
 class ApplicationController < ActionController::API
     def current_user
+        # 本番になったらこの一行を消す↓
+        return User.last if Rails.env.development?
+
         @current_user ||= begin
-        token = request.headers["Authorization"]&.split(" ")&.last
-        next nil unless token
+            token = request.headers["Authorization"]&.split(" ")&.last
 
-        decoded = JsonWebToken.decode(token)
-        next nil unless decoded
+            if token
+                decoded = JsonWebToken.decode(token)
 
-        User.find_by(id: decoded[:user_id])
+                if decoded
+                    User.find_by(id: decoded[:user_id])
+                end
+            end
         end
     end
 

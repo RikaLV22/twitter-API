@@ -9,12 +9,12 @@ class TweetsController < ApplicationController
         id: tweet.id,
         body: tweet.body,
         user: {
-          id: t.user.id,
-          name: t.user.username,
-          username: t.user.username
+          id: tweet.user.id,
+          name: tweet.user.username,
+          username: tweet.user.username
         },
-        likes_count: t.likes.count,
-        liked: current_user ? t.likes.exsists?(user: current_user) : false
+        likes_count: tweet.likes.count,
+        liked: current_user ? tweet.likes.exists?(user: current_user) : false
       }
     }
   end
@@ -24,18 +24,15 @@ class TweetsController < ApplicationController
     render json: tweet, include: :user
   end
 
-  def show
-    tweet = Tweet.find(params[:id])
-    render json: tweet, include: :user
-  end
-
   def create
+    
     tweet = current_user.tweets.build(tweet_params)
 
     if tweet.save
       render json: tweet, include: :user, status: :created
     else
-      render json: { errors: tweet.errors.full_messages }, status: :unprocessable_entity
+      render json: { errors: tweet.errors.full_messages },
+             status: :unprocessable_entity
     end
   end
 
