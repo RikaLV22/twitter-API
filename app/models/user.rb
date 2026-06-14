@@ -30,6 +30,7 @@ class User < ApplicationRecord
 
     has_many :tweets
     has_many :likes, dependent: :destroy
+    has_many :retweets
 
     has_many :active_follows,
             class_name: "Follow",
